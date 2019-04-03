@@ -9,15 +9,18 @@ int main(void)
 	int c;  // текущий символ из потока  
 	int flag; // признак слова  
 	int cnt;  // счётчик  
+	int nflag;
+	int s;
 
+	nflag = 0;
 	cnt = 0; 
 	flag = NO;
 
-	while( (c = getchar()) != EOF ) 
+	while ((c = getchar()) != EOF)
 	{
 		if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z')
 		{
-			if    (c == 'a' || c == 'A'
+			if (c == 'a' || c == 'A'
 				|| c == 'e' || c == 'E'
 				|| c == 'i' || c == 'I'
 				|| c == 'y' || c == 'Y'
@@ -25,15 +28,25 @@ int main(void)
 				|| c == 'u' || c == 'U')
 			{
 				if (flag == NO)
-					cnt = cnt + 1;
+					s = c;
 			}
 
 			flag = YES;
 		}
-		else
-		{    
-		    flag = NO;
+		else if (c >= '0'&&c <= '9')
+		{
+			nflag = YES;
 		}
+		else 
+		{
+			if (nflag == NO && flag == YES)
+			{
+				cnt++;
+			}
+			nflag = NO;
+			flag = NO;
+		}
+		
 	}
 	printf("number of words = %d\n", cnt);
 	getchar();

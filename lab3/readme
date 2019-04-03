@@ -28,7 +28,7 @@ int main(void)
 				|| c == 'u' || c == 'U')
 			{
 				if (flag == NO)
-					s = c;
+					s = YES;
 			}
 
 			flag = YES;
@@ -45,6 +45,7 @@ int main(void)
 			}
 			nflag = NO;
 			flag = NO;
+			s = NO;
 		}
 		
 	}

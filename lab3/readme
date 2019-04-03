@@ -1,1 +1,42 @@
 Задание для 3 лабы
+#include <stdio.h> 
+
+#define YES  1 
+#define NO   0 
+
+int main(void)
+{
+	int c;  // текущий символ из потока  
+	int flag; // признак слова  
+	int cnt;  // счётчик  
+
+	cnt = 0; 
+	flag = NO;
+
+	while( (c = getchar()) != EOF ) 
+	{
+		if (c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z')
+		{
+			if    (c == 'a' || c == 'A'
+				|| c == 'e' || c == 'E'
+				|| c == 'i' || c == 'I'
+				|| c == 'y' || c == 'Y'
+				|| c == 'o' || c == 'O'
+				|| c == 'u' || c == 'U')
+			{
+				if (flag == NO)
+					cnt = cnt + 1;
+			}
+
+			flag = YES;
+		}
+		else
+		{    
+		    flag = NO;
+		}
+	}
+	printf("number of words = %d\n", cnt);
+	getchar();
+	getchar();
+	return 0;
+}

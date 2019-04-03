@@ -15,6 +15,7 @@ int main(void)
 	nflag = 0;
 	cnt = 0; 
 	flag = NO;
+	s = NO;
 
 	while ((c = getchar()) != EOF)
 	{

@@ -1,0 +1,50 @@
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <time.h> 
+#define N 10 
+#define K 15 
+
+int main(void)
+{
+	int array[N][K], sumArr[N], j = 0, i = 0, posMax = 0, posMin = 0, tmp = 0;
+	srand(time(NULL));
+
+	printf("initial array:\n");
+	for (i = 0; i < N; i++)
+	{
+		for (j = 0; j < K; j++)
+		{
+			array[i][j] = -200 + rand() % 401;
+			sumArr[i] += array[i][j];
+			printf("%4d ", array[i][j]);
+		}
+		if (sumArr[i] > sumArr[posMax])
+			posMax = i;
+		else if (sumArr[i] < sumArr[posMin])
+			posMin = i;
+
+		printf("\n");
+	}
+
+	printf("\nposMax = %d, posMin = %d\n", posMax, posMin);
+
+	for (j = 0; j < K; j++)
+	{
+		tmp = array[posMax][j];
+		array[posMax][j] = array[posMin][j];
+		array[posMin][j] = tmp;
+	}
+
+	printf("final array:\n");
+	for (i = 0; i < N; i++)
+	{
+		for (j = 0; j < K; j++)
+		{
+			printf("%4d ", array[i][j]);
+		}
+		printf("\n");
+	}
+
+	system("pause");
+	return 0;
+}

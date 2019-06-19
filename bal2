@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+ 
+int main(void)
+{
+	long int N = 0; 
+	char a;
+	int i = 0, j = 0;
+	
+	printf("Enter N = ");
+	
+	while ((a=getchar())!='\n' && i+j<sizeof(long int)*8) 
+	{
+		if ((a < '0') || (a > '1'))
+		{
+			printf("error\n");
+			system("pause");
+			break;
+			
+		}
+		N <<= 1;
+		N += a - '0';
+		if (a == '0')
+			i++;
+		else
+			j++;
+	}
+	printf("\nN=%d 0:=%d 1:=%d\n", N, i, j);
+	system("pause");
+	return 0;
+}

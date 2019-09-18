@@ -1,0 +1,53 @@
+#include<stdio.h>
+#define MAXLINE 1000
+#define YES 1
+#define NO 0
+
+int main(void)
+{
+	char buffer[MAXLINE], c, *cptr, *wstart, *pwstart;
+	int flag;
+
+	fgets(buffer, MAXLINE, stdin);
+	cptr = buffer;		// текущая позиция входного потока
+	wstart = buffer;	// позиция начала текущего слова
+	pwstart = buffer;	// позиция начала предыдущего слова
+	flag = NO;			// признак слова
+
+	do {
+		c = *cptr;
+
+		if (c == ' ' || c == '.' || c == ',' ||
+			c == ';' || c == '\n' || c == '\0')
+		{
+			//если найден разделитель
+
+			if (c == '\n' && pwstart != wstart)
+			{
+				//если найден конец строки и введено не одно слово
+
+				//в цикле удаляем предпоследнее слово
+				while (wstart <= cptr + 1)
+					*pwstart++ = *wstart++;
+				break;
+			}
+			pwstart = (flag == YES) ? wstart : pwstart;	//если первый разделитель после слова,
+														//то запоминаем позицию начала предыдущего слова
+			flag = NO;
+		}
+		else
+		{
+			//если найдена буква
+
+			wstart = (flag == NO) ? cptr : wstart;	//если это первая буква в слове, то
+													//запоминаем позицию начала текущего слова
+			flag = YES;
+		}
+
+		cptr++;
+	} while (c != '\0');
+
+	fputs(buffer, stdout);
+	getchar();
+	return 0;
+}
